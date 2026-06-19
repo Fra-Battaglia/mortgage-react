@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import 'tailwindcss';
+
+:root {
+  --text: #404146;
+  --text-h: #111827;
+  --bg: #ffffff;
+  --border: #F0F1F5;
+  --code-bg: #ffffff;
+
+  --accent: hsl(230, 92%, 52%);
+  --accent-bg: hsla(230, 92%, 52%, 1);
+  --accent-border: hsl(230, 92%, 52%);
+
+  --danger: hsl(353, 92%, 61%);
+  --danger-bg: hsla(353, 92%, 61%, 1);
+  --danger-border: hsl(353, 92%, 61%);
+  
+  --warning: hsl(40, 92%, 52%);
+  --warning-bg: hsla(40, 92%, 52%, 1);
+  --warning-border: hsl(40, 92%, 52%);
+  
+  --success: hsl(154, 92%, 32%);
+  --success-bg: hsla(154, 92%, 32%, 1);
+  --success-border: hsl(154, 92%, 32%);
+
+  --social-bg: rgba(244, 243, 236, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  --sans: "Inter", system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: "Inter", system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  /* font: 18px/145% var(--sans); */
+  /* letter-spacing: 0.18px; */
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #a0a1a6;
+    --text-h: #e0e1e6;
+    --bg: #0A0B10;
+    --border: #27282d;
+    --code-bg: #16171B;
+
+    --accent: hsl(226, 91%, 62%);
+    --accent-bg: hsla(226, 91%, 62%, 0.1);
+    --accent-border: hsl(226, 91%, 62%);
+
+    --danger: hsl(353, 92%, 62%);
+    --danger-bg: hsla(353, 92%, 62%, 0.1);
+    --danger-border: hsl(353, 92%, 62%);
+
+    --warning: hsl(40, 92%, 62%);
+    --warning-bg: hsla(40, 92%, 62%, 0.1);
+    --warning-border: hsl(40, 92%, 62%);
+
+    --success: hsl(154, 92%, 62%);
+    --success-bg: hsla(154, 92%, 62%, 0.1);
+    --success-border: hsl(154, 92%, 62%);
+
+    --social-bg: rgba(47, 48, 58, 0.5);
+    --shadow:
+      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  }
+}
+
+.container {
+  margin: 0 auto;
+}
