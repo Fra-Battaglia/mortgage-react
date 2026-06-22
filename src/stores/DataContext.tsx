@@ -41,11 +41,38 @@ export function DataProvider({ children }: { children: ReactNode }) {
 			store.isRateFixed
 		);
 
-		updateStore({ calculationResults: results })
+		const updatedHistory = [results, ...store.storedData];
+
+		updateStore({ calculationResults: results})
+		updateHistory(updatedHistory)
+	}
+
+	// Update History
+	const updateHistory = (newHistory:Mortgage[]) => {
+		updateStore({ storedData: newHistory });
+		saveToLocalStorage(newHistory)
+	}
+
+	// Remove one mortgage from history
+	const removeFromHistory = (index:number) => {
+		const newHistory = store.storedData.filter((_, i) => i !== index);
+		updateHistory(newHistory);
+	}
+
+	// Delete all mortgages from history
+	const deleteHistory = () => {
+		updateStore({ storedData: [], selectedIndices: [], selectedMortgages: [] });
+		saveToLocalStorage([]);
+	}
+
+	// Save history to local storage
+	const saveToLocalStorage = (newHistory:Mortgage[]) => {
+		localStorage.setItem('mortgageHistory', JSON.stringify(newHistory));
+		
 	}
 
 	return (
-		<DataContext.Provider value={{ store, updateStore, calculateAndSend }}>
+		<DataContext.Provider value={{ store, updateStore, calculateAndSend, deleteHistory, removeFromHistory }}>
 			{children}
 		</DataContext.Provider>
 	);

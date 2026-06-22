@@ -1,6 +1,7 @@
 import { useData } from "./stores/DataContext"
 import AppForm from "./components/AppForm.tsx";
 import AppMortgageResults from "./components/AppMortgageResults.tsx";
+import AppMortgageHistory from "./components/AppMortgageHistory.tsx";
 // import type Mortgage from "./types/Mortgage"
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
 					)}
 				</div>
 			</div>
+			<AppMortgageHistory />
 		</div>
   	)
 }
