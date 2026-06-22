@@ -2,6 +2,7 @@ import { useData } from "./stores/DataContext"
 import AppForm from "./components/AppForm.tsx";
 import AppMortgageResults from "./components/AppMortgageResults.tsx";
 import AppMortgageHistory from "./components/AppMortgageHistory.tsx";
+import AppCompairsonPanel from "./components/AppCompairsonPanel.tsx";
 // import type Mortgage from "./types/Mortgage"
 
 function App() {
@@ -19,15 +20,23 @@ function App() {
 					{/* Form */}
 					<AppForm />
 				</div>
-				<div
-					className="lg:col-span-7 bg-(--bg) border border-(--accent) rounded-3xl p-6 md:p-8 backdrop-blur-md h-full">
-					{/* Results Panel */}
+
+				{/* Results Panel */}
+
+				<div className="lg:col-span-7 bg-(--bg) border border-(--accent) rounded-3xl p-6 md:p-8 backdrop-blur-md h-full">
 					{store.calculationResults && (
 						<AppMortgageResults results={store.calculationResults} />
 					)}
 				</div>
 			</div>
+
+			{/* History Panel */}
 			<AppMortgageHistory />
+
+			{/* Comparison Panel */}
+			{store.selectedMortgages.length > 0 && (
+				<AppCompairsonPanel />
+			)}
 		</div>
   	)
 }

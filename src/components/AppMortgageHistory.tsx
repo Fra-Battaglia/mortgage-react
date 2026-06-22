@@ -2,7 +2,7 @@ import { useData } from "../stores/DataContext";
 import type Mortgage from "../types/Mortgage";
 
 function AppMortgageHistory() {
-	const { store, deleteHistory, removeFromHistory } = useData();
+	const { store, deleteHistory, removeFromHistory, selectMortgage } = useData();
 
 	return (
 		<div className="bg-(--bg) border border-(--accent) rounded-3xl overflow-hidden backdrop-blur-md h-full mt-8">
@@ -42,6 +42,8 @@ function AppMortgageHistory() {
 													type="checkbox"
 													name="selectedMortgage"
 													id={`mortgage-${index}`}
+													checked={store.selectedMortgages.includes(mortgage) ? true : false}
+													onChange={() => selectMortgage(mortgage)}
 												/>
 											</td>
 											<td className="px-4 py-3 text-nowrap">€ {mortgage.principal}</td>
@@ -68,10 +70,10 @@ function AppMortgageHistory() {
 														viewBox="0 0 24 24"
 														fill="none"
 														stroke="currentColor"
-														stroke-width="2"
-														stroke-linecap="round"
-														stroke-linejoin="round"
-														onClick={() => removeFromHistory(index)}
+														strokeWidth="2"
+														strokeLinecap="round"
+														strokeLinejoin="round"
+														onClick={() => removeFromHistory(mortgage)}
 														className="lucide lucide-x-icon lucide-x text-sm cursor-pointer">
 														<path d="M18 6 6 18" />
 														<path d="m6 6 12 12" />

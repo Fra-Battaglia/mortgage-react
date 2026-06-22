@@ -15,7 +15,6 @@ const initialState = {
 
 	// History and selected
 	storedData: JSON.parse(localStorage.getItem('mortgageHistory') || '[]') as Mortgage[],
-	selectedIndices: [] as number[],
 	selectedMortgages: [] as Mortgage[],
 };
 
@@ -54,25 +53,41 @@ export function DataProvider({ children }: { children: ReactNode }) {
 	}
 
 	// Remove one mortgage from history
-	const removeFromHistory = (index:number) => {
-		const newHistory = store.storedData.filter((_, i) => i !== index);
+	const removeFromHistory = (mortgage:Mortgage) => {
+		const newHistory = store.storedData.filter((m) => m !== mortgage);
 		updateHistory(newHistory);
+		
+		const newSelected = store.selectedMortgages.filter((m) => m !== mortgage);
+		updateStore({ selectedMortgages: newSelected })
 	}
 
 	// Delete all mortgages from history
 	const deleteHistory = () => {
-		updateStore({ storedData: [], selectedIndices: [], selectedMortgages: [] });
+		updateStore({ storedData: [], selectedMortgages: [] });
 		saveToLocalStorage([]);
 	}
+
+	// Select mortgage to compare
+	const selectMortgage = (mortgage: Mortgage) => {
+		const newSelectedMortgages = store.selectedMortgages.includes(mortgage) 
+			? store.selectedMortgages.filter((m) => m !== mortgage)
+			: [...store.selectedMortgages, mortgage];
+
+		updateStore({ selectedMortgages: newSelectedMortgages });
+	};
+
+	// Deselect mortgage
+	const removeSelectedMortgage = (mortgage: Mortgage) => {
+		selectMortgage(mortgage)
+	};
 
 	// Save history to local storage
 	const saveToLocalStorage = (newHistory:Mortgage[]) => {
 		localStorage.setItem('mortgageHistory', JSON.stringify(newHistory));
-		
 	}
 
 	return (
-		<DataContext.Provider value={{ store, updateStore, calculateAndSend, deleteHistory, removeFromHistory }}>
+		<DataContext.Provider value={{ store, updateStore, calculateAndSend, deleteHistory, removeFromHistory, selectMortgage, removeSelectedMortgage }}>
 			{children}
 		</DataContext.Provider>
 	);
